@@ -1,6 +1,7 @@
 import pygame
 import threading
 
+import messagebox
 import settings
 from grid import Grid
 from node import Node
@@ -19,7 +20,7 @@ class App:
         pygame.display.set_caption("A* Pathfinding")
 
         self.clock = pygame.time.Clock()
-        self.FPS = 60
+        self.FPS = 20
 
         self.reset_grid()
 
@@ -73,24 +74,31 @@ class App:
                 astar.reset_algorithm(self.nodes)
 
                 if settings.visual == 0:
-                    astar.algorithm(self.start_node, self.end_node, self.nodes, self.draw)
+                    path = astar.algorithm(self.start_node, self.end_node, self.nodes, self.draw)
                 else:
-                    astar.algorithm(self.start_node, self.end_node, self.nodes)
+                    path = astar.algorithm(self.start_node, self.end_node, self.nodes)
 
                     if settings.visual == 2:
                         astar.reset_algorithm(self.nodes, path=False)
 
+                steps = len(path)
+                messagebox.showinfo("Path Found!", f"Steps Taken: {steps}")
+
             if keys[pygame.K_1]:
                 settings.visual = 0
+                messagebox.showinfo("Algorithm Mode Changed!", "Mode: 1")
 
             if keys[pygame.K_2]:
                 settings.visual = 1
+                messagebox.showinfo("Algorithm Mode Changed!", "Mode: 2")
 
             if keys[pygame.K_3]:
                 settings.visual = 2
-
+                messagebox.showinfo("Algorithm Mode Changed!", "Mode: 3")
 
             self.draw()
+
+        pygame.quit()
 
     def draw(self):
         self.win.fill(settings.bg_color)
