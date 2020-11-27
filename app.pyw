@@ -74,27 +74,21 @@ class App:
                 astar.reset_algorithm(self.nodes)
 
                 if settings.visual == 0:
-                    path = astar.algorithm(self.start_node, self.end_node, self.nodes, self.draw)
+                    astar.algorithm(self.start_node, self.end_node, self.nodes, self.draw)
                 else:
-                    path = astar.algorithm(self.start_node, self.end_node, self.nodes)
+                    astar.algorithm(self.start_node, self.end_node, self.nodes)
 
                     if settings.visual == 2:
                         astar.reset_algorithm(self.nodes, path=False)
 
-                steps = len(path)
-                messagebox.showinfo("Path Found!", f"Steps Taken: {steps}")
-
             if keys[pygame.K_1]:
                 settings.visual = 0
-                messagebox.showinfo("Algorithm Mode Changed!", "Mode: 1")
 
             if keys[pygame.K_2]:
                 settings.visual = 1
-                messagebox.showinfo("Algorithm Mode Changed!", "Mode: 2")
 
             if keys[pygame.K_3]:
                 settings.visual = 2
-                messagebox.showinfo("Algorithm Mode Changed!", "Mode: 3")
 
             self.draw()
 
