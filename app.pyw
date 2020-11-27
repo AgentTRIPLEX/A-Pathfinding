@@ -37,6 +37,8 @@ class App:
             buttons = pygame.mouse.get_pressed()
 
             if buttons[0]:
+                astar.reset_algorithm(self.nodes)
+
                 row, col = self.get_node(pygame.mouse.get_pos())
                 node = self.nodes[row][col]
 
@@ -48,9 +50,12 @@ class App:
                     self.start_node = node
 
                 elif node not in [self.start_node, self.end_node]:
+                    astar.reset_algorithm(self.nodes)
                     node.make_barrier()
 
             if buttons[2]:
+                astar.reset_algorithm(self.nodes)
+
                 row, col = self.get_node(pygame.mouse.get_pos())
                 node = self.nodes[row][col]
 
