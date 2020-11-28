@@ -107,9 +107,9 @@ def get_path(came_from, current):
     path = []
 
     while current in came_from:
-        current = came_from[current]
         current.make_path()
         path.append(current)
+        current = came_from[current]
 
     return path
 

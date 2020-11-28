@@ -1,7 +1,6 @@
 import pygame
 import threading
 
-import messagebox
 import settings
 from grid import Grid
 from node import Node
@@ -67,10 +66,10 @@ class App:
                 elif node.is_barrier():
                     node.reset()
 
-            if keys[pygame.K_SPACE]:
+            if keys[pygame.K_c]:
                 self.reset_grid()
 
-            if keys[pygame.K_RETURN] and self.start_node and self.end_node:
+            if (keys[pygame.K_RETURN] or keys[pygame.K_SPACE]) and self.start_node and self.end_node:
                 astar.reset_algorithm(self.nodes)
 
                 if settings.visual == 0:
